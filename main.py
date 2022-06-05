@@ -21,8 +21,13 @@ try:
     hwnd = pymem.process.module_from_name(pm.process_handle, game_name).lpBaseOfDll
     for i in range(len(offset)):
         m_locate = resolve_address(pointer[i], hwnd + offset[i])
-        a = pm.write_string(m_locate, "zhTW")
-        print(f"已修改記憶體 {hex(m_locate)} 為 zhTW")
+        for k in range(3):
+            pm.write_string(m_locate-(k*0x30), "zhTW")
+            print(f"已修改記憶體 {hex(m_locate-(k*0x30))} 為 zhTW")
+
+        for k in range(8):
+            pm.write_string(m_locate+(k*0x30), "zhTW")
+            print(f"已修改記憶體 {hex(m_locate+(k*0x30))} 為 zhTW")
 except Exception as e:
     print(e)
     print("可能沒有啟動遊戲")
