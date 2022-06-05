@@ -21,18 +21,15 @@ try:
     hwnd = pymem.process.module_from_name(pm.process_handle, game_name).lpBaseOfDll
     for i in range(len(offset)):
         m_locate = resolve_address(pointer[i], hwnd + offset[i])
-        for k in range(3):
-            pm.write_string(m_locate-(k*0x30), "zhTW")
-            print(f"已修改記憶體 {hex(m_locate-(k*0x30))} 為 zhTW")
-
-        for k in range(8):
-            pm.write_string(m_locate+(k*0x30), "zhTW")
-            print(f"已修改記憶體 {hex(m_locate+(k*0x30))} 為 zhTW")
+        pm.write_string(m_locate, "zhTW")
+        pm.write_string(m_locate+0xC0, "zhTW")
+        print(f"已修改記憶體 {hex(m_locate)} 為 zhTW")
+        print(f"已修改記憶體 {hex(m_locate+0xC0)} 為 zhTW")
 except Exception as e:
     print(e)
     print("可能沒有啟動遊戲")
 finally:
-    print("程序結束，請手動至遊戲內修改韓文語系，如失敗可嘗試重啟幾次遊戲反覆操作")
+    print("程序結束，請手動至遊戲內修改任意語系，如失敗可嘗試重啟幾次遊戲反覆操作")
     print("若多次失敗，且手動能力高者，可自行搜尋 Array of Bytes [6B 6F 4B 52 00 00 00 00 ?? 00 00 00 00 00 00 00] 修改")
     print("此程式由 看門狗[watchdog.fun] 站長製作")
     time.sleep(5)
