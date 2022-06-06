@@ -8,3 +8,4 @@
 * 沙花叉クロヱ Sakamata [【情報】PC&手機主程式下載方式／PC登入方式](https://forum.gamer.com.tw/Co.php?bsn=35531&sn=513&subbsn=1&bPage=0)
 * [memory_manipulator.py](https://github.com/amacati/SoulsGym/blob/4d64695708953860e376f74cb04c095d762d5307/soulsgym/core/memory_manipulator.py)
 * [Pymem](https://github.com/srounet/Pymem)
+* [Memory.dll](https://github.com/erfg12/memory.dll)
