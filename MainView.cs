@@ -34,11 +34,15 @@ namespace DiabloImmortalToZHTW
                 m.OpenProcess(GameName);
                 for (int i = 0; i < Offsets.Count; i++)
                 {
-                    var koKR_mem = m.Get64BitCode($"{GameName}+{Offsets[i]},{Pointers[i]}");
-                    m.WriteMemory($"{koKR_mem}", "string", "zhTW");
-                    m.WriteMemory($"{koKR_mem + 0xC0}", "string", "zhTW");
-                    txt_status.Text += $"已修改 {koKR_mem} 為 zhTW\r\n";
-                    txt_status.Text += $"已修改 {koKR_mem + 0xC0} 為 zhTW\r\n";
+                    var koKR_mem = (ulong)m.Get64BitCode($"{GameName}+{Offsets[i]},{Pointers[i]}");
+                    Console.WriteLine(koKR_mem);
+                    var r = m.WriteMemory(koKR_mem.ToString("X"), "string", "zhTW");
+                    var r2 = m.WriteMemory($"{(koKR_mem + 0xC0).ToString("X")}", "string", "zhTW");
+                    if (r && r2)
+                    {
+                        txt_status.Text += $"已修改 {koKR_mem} 為 zhTW\r\n";
+                        txt_status.Text += $"已修改 {koKR_mem + 0xC0} 為 zhTW\r\n";
+                    }
                 }
             }
             catch (Exception ex)
