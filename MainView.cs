@@ -23,6 +23,7 @@ namespace DiabloImmortalToZHTW
         public MainView()
         {
             InitializeComponent();
+            cb_language.SelectedIndex = 0;
             JustDoIt();
         }
 
@@ -36,12 +37,12 @@ namespace DiabloImmortalToZHTW
                 {
                     var koKR_mem = (ulong)m.Get64BitCode($"{GameName}+{Offsets[i]},{Pointers[i]}");
                     Console.WriteLine(koKR_mem);
-                    var r = m.WriteMemory(koKR_mem.ToString("X"), "string", "zhTW");
-                    var r2 = m.WriteMemory($"{(koKR_mem + 0xC0).ToString("X")}", "string", "zhTW");
+                    var r = m.WriteMemory(koKR_mem.ToString("X"), "string", cb_language.Text);
+                    var r2 = m.WriteMemory($"{(koKR_mem + 0xC0).ToString("X")}", "string", cb_language.Text);
                     if (r && r2)
                     {
-                        txt_status.Text += $"已修改 {koKR_mem} 為 zhTW\r\n";
-                        txt_status.Text += $"已修改 {koKR_mem + 0xC0} 為 zhTW\r\n";
+                        txt_status.Text += $"已修改 {koKR_mem} 為 {cb_language.Text}\r\n";
+                        txt_status.Text += $"已修改 {koKR_mem + 0xC0} 為 {cb_language.Text}\r\n";
                     }
                 }
             }
